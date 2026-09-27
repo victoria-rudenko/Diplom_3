@@ -16,13 +16,7 @@ class LoginPage(BasePage):
         self._close_modal_if_exists()
 
     def is_login_page(self):
-        try:
-            WebDriverWait(self.driver, 10).until(
-                EC.url_contains("/login")
-            )
-            return True
-        except TimeoutException:
-            return False
+        return "/login" in self.get_current_url()
 
     def _close_modal_if_exists(self):
         try:

@@ -22,7 +22,8 @@ class TestAccount:
 
         login_page = LoginPage(driver)
         with allure.step("Проверяем, что текущий URL соответствует странице логина"):
-            assert login_page.is_login_page(), f"Не попали на логин. URL: {driver.current_url}"
+            current_url = login_page.get_current_url()
+            assert login_page.is_login_page(), f"Не попали на логин. URL: {current_url}"
 
     @allure.story("История заказов")
     @allure.title("Проверка навигации в историю заказов из аккаунта")
@@ -41,7 +42,8 @@ class TestAccount:
             account_page.click_order_history()
 
         with allure.step("Проверяем, что мы на странице истории заказов"):
-            assert account_page.is_on_order_history_page(), f"Не попали в историю. URL: {driver.current_url}"
+            current_url = account_page.get_current_url()
+            assert account_page.is_on_order_history_page(), f"Не попали в историю. URL: {current_url}"
 
     @allure.story("Выход из системы")
     @allure.title("Проверка корректного выхода из личного кабинета")
@@ -58,4 +60,5 @@ class TestAccount:
             account_page.click_logout()
 
         with allure.step("Проверяем, что URL больше не содержит /profile"):
-            assert "/profile" not in driver.current_url, f"Мы всё еще в профиле после выхода! URL: {driver.current_url}"
+            current_url = account_page.get_current_url()
+            assert "/profile" not in current_url, f"Мы всё еще в профиле после выхода! URL: {current_url}"

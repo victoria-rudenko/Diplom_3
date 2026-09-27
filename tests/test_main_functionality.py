@@ -36,7 +36,8 @@ class TestMainFunctionality:
             main_page.click_order_feed()
 
         with allure.step("Проверяем, что URL содержит '/feed'"):
-            assert "/feed" in driver.current_url, "Не удалось перейти в Ленту заказов"
+            current_url = main_page.get_current_url()
+            assert "/feed" in current_url, "Не удалось перейти в Ленту заказов"
 
     @allure.story("Модальные окна ингредиентов")
     @allure.title("Проверка открытия модального окна ингредиента при клике")
